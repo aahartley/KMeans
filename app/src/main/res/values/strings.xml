@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KMeans</string>
+    <string name="start">Start</string>
+    <string name="title">K Means</string>
+    <string name="tV">Social Class (first,second,third,crew)</string>
+    <string name="tV2">Age (adult or child)</string>
+    <string name="tV3">Sex (male or female)</string>
+    <string name="tV4">Pick K (2–5)</string>
+    <string name="kLarge">K is larger than the dataset</string>
+    <string name="live">You would probably survive</string>
+    <string name="die">You would probably not survive</string>
+    <string name="pick_clusters_2_3_first_clicks_are_the_cluster_starts">Pick Clusters 2-3 (first clicks are the cluster starts)</string>
+    <string name="reset">reset</string>
+</resources>
