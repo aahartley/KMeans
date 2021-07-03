@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             String input = et.getText().toString().toLowerCase().trim();
-            if (input.isEmpty() || !input.equals("1") & !input.equals("2") & !input.equals("3") & !input.equals("4") & !input.equals("5")) {
+            if (input.isEmpty() || !input.equals("2") & !input.equals("3")) {
                 et.setError("must match above");
 
             }

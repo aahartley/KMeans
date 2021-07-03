@@ -3,6 +3,7 @@ package com.hartdroid.kmeans;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.autofill.Dataset;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
     Button bt = null;
     Button bt2 = null;
     Button bt3 = null;
+    Button button = null;
     TextView tV = null;
     TextView tV2 = null;
     TextView tV3 = null;
@@ -33,6 +35,8 @@ public class SecondActivity extends AppCompatActivity {
     EditText et3 = null;
     List<String> lines = new ArrayList<>();
     List<Player> dataset = new ArrayList<>();
+    static List<String> allLines= new ArrayList<>();
+
     int k = 3;
     GraphView view;
 
@@ -46,6 +50,7 @@ public class SecondActivity extends AppCompatActivity {
         bt = super.findViewById(R.id.bt);
         bt2 = super.findViewById(R.id.bt2);
         bt3= super.findViewById(R.id.bt3);
+        button = super.findViewById(R.id.button);
         tV = super.findViewById(R.id.tV);
         tV4 = super.findViewById(R.id.tV4);
         et = super.findViewById(R.id.et);
@@ -57,7 +62,9 @@ public class SecondActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        button.setOnClickListener(v -> {
+            startData();
+        });
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +76,9 @@ public class SecondActivity extends AppCompatActivity {
 
                 }
                 String input = et.getText().toString().toLowerCase().trim();
-                if (input.isEmpty() || !input.equals("1") & !input.equals("2") & !input.equals("3") & !input.equals("4") & !input.equals("5")) {
+                if (input.isEmpty() || !input.equals("2") & !input.equals("3")) {
                     et.setError("must match above");
+
 
                 }
 
@@ -93,10 +101,10 @@ public class SecondActivity extends AppCompatActivity {
                     view.erase(false);
                     Classify3();
                 }
-                else if (k == 4)
-                    Classify3();
-                else if (k == 5)
-                    Classify3();
+                //else
+                  //  et.setError("must match above");
+
+
 
 
             }
@@ -116,7 +124,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
     }
+    protected void startData(){
 
+        Intent intent = new Intent(this, Data.class);
+        startActivity(intent);
+    }
     protected double euclideanDistance(Player x, Player y) {
         //System.out.println(x.toString()+" "+y.toString());
         return (Math.sqrt((Math.pow((x.getApm()) - (y.getApm()), 2)) + (Math.pow((x.getHeight()) - (y.getHeight()), 2)) +
@@ -132,6 +144,8 @@ public class SecondActivity extends AppCompatActivity {
         while ((line = buf.readLine()) != null) {
             if (line.contains("@")) {
                 // System.out.println(line +"avoid");
+                allLines.add(line);
+
             } else {
                 //System.out.println(line);
                 String[] tokens = line.split(",");
@@ -144,6 +158,8 @@ public class SecondActivity extends AppCompatActivity {
 
                 dataset.add(new Player(attr[0], attr[1], attr[2], attr[3], attr[4]));
                 //lines.add(line);
+                allLines.add(line);
+
             }
         }
 
